@@ -532,6 +532,13 @@ const docTemplate = `{
                 "summary": "Gets dishes",
                 "parameters": [
                     {
+                        "type": "string",
+                        "description": "Kitchen ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
                         "type": "integer",
                         "description": "Page number",
                         "name": "page",
@@ -637,7 +644,7 @@ const docTemplate = `{
                         "type": "string",
                         "description": "Kitchen ID",
                         "name": "id",
-                        "in": "query",
+                        "in": "path",
                         "required": true
                     },
                     {

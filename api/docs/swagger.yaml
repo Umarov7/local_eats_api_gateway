@@ -936,6 +936,11 @@ paths:
     get:
       description: Retrieves dishes info from database
       parameters:
+      - description: Kitchen ID
+        in: path
+        name: id
+        required: true
+        type: string
       - description: Page number
         in: query
         name: page
@@ -1003,7 +1008,7 @@ paths:
       description: Gets reviews from database
       parameters:
       - description: Kitchen ID
-        in: query
+        in: path
         name: id
         required: true
         type: string

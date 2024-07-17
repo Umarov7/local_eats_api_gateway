@@ -54,7 +54,7 @@ func (h *Handler) CreateReview(c *gin.Context) {
 // @Description Gets reviews from database
 // @Tags review
 // @Security ApiKeyAuth
-// @Param id query string true "Kitchen ID"
+// @Param id path string true "Kitchen ID"
 // @Param page query int true "Page number"
 // @Param limit query int true "Number of items per page"
 // @Success 200 {object} review.Reviews

@@ -187,6 +187,7 @@ func (h *Handler) DeleteDish(c *gin.Context) {
 // @Description Retrieves dishes info from database
 // @Tags kitchen
 // @Security ApiKeyAuth
+// @Param id path string true "Kitchen ID"
 // @Param page query int true "Page number"
 // @Param limit query int true "Number of items per page"
 // @Success 200 {object} dish.Dishes
