@@ -167,6 +167,44 @@
                 }
             }
         },
+        "/local-eats/dishes/{id}/nutrition-info": {
+            "get": {
+                "description": "Informs about dish's nutritional value",
+                "tags": [
+                    "dish"
+                ],
+                "summary": "Gets dish's nutrition info",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Dish ID",
+                        "name": "dish_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/extra.NutritionalInfo"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid dish ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error while processing request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "/local-eats/kitchens": {
             "get": {
                 "description": "Fetches all kitchens from database",
@@ -514,6 +552,82 @@
                     },
                     "400": {
                         "description": "Invalid review data",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error while processing request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/local-eats/kitchens/{id}/statistics": {
+            "get": {
+                "description": "Informs about kitchen statistics by date",
+                "tags": [
+                    "kitchen"
+                ],
+                "summary": "Gets kitchen's statistics",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Kitchen ID",
+                        "name": "kitchen_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/extra.Statistics"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid kitchen ID or date format",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error while processing request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/local-eats/kitchens/{id}/working-hours": {
+            "post": {
+                "description": "Sets working hours for kitchen",
+                "tags": [
+                    "kitchen"
+                ],
+                "summary": "Sets working hours",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Kitchen ID",
+                        "name": "kitchen_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/extra.WorkingHoursResp"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid kitchen ID or data",
                         "schema": {
                             "type": "string"
                         }
@@ -918,6 +1032,44 @@
                     }
                 }
             }
+        },
+        "/local-eats/users/{id}/activity": {
+            "get": {
+                "description": "Informs about user's activity by date",
+                "tags": [
+                    "user"
+                ],
+                "summary": "Tracks user's activity",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "User ID",
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/extra.Activity"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid user ID or date format",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Server error while processing request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -1138,6 +1290,148 @@
                 },
                 "price": {
                     "type": "number"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "extra.Activity": {
+            "type": "object",
+            "properties": {
+                "favorite_cuisines": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/extra.Cuisine"
+                    }
+                },
+                "favorite_kitchens": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/extra.Kitchen"
+                    }
+                },
+                "total_orders": {
+                    "type": "integer"
+                },
+                "total_spent": {
+                    "type": "number"
+                }
+            }
+        },
+        "extra.Cuisine": {
+            "type": "object",
+            "properties": {
+                "cuisine_type": {
+                    "type": "string"
+                },
+                "orders_count": {
+                    "type": "integer"
+                }
+            }
+        },
+        "extra.DaySchedule": {
+            "type": "object",
+            "properties": {
+                "close": {
+                    "type": "string"
+                },
+                "open": {
+                    "type": "string"
+                }
+            }
+        },
+        "extra.Dish": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "orders_count": {
+                    "type": "integer"
+                },
+                "revenue": {
+                    "type": "number"
+                }
+            }
+        },
+        "extra.Kitchen": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "orders_count": {
+                    "type": "integer"
+                }
+            }
+        },
+        "extra.NutritionalInfo": {
+            "type": "object",
+            "properties": {
+                "allergens": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "calories": {
+                    "type": "integer"
+                },
+                "carbs": {
+                    "type": "integer"
+                },
+                "dietary_info": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "fat": {
+                    "type": "integer"
+                },
+                "protein": {
+                    "type": "integer"
+                }
+            }
+        },
+        "extra.Statistics": {
+            "type": "object",
+            "properties": {
+                "average_rating": {
+                    "type": "number"
+                },
+                "top_dishes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/extra.Dish"
+                    }
+                },
+                "total_orders": {
+                    "type": "integer"
+                },
+                "total_revenue": {
+                    "type": "number"
+                }
+            }
+        },
+        "extra.WorkingHoursResp": {
+            "type": "object",
+            "properties": {
+                "kitchen_id": {
+                    "type": "string"
+                },
+                "schedule": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/extra.DaySchedule"
+                    }
                 },
                 "updated_at": {
                     "type": "string"

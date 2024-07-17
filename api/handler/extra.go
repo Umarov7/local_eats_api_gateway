@@ -16,6 +16,8 @@ import (
 // @Description Informs about kitchen statistics by date
 // @Tags kitchen
 // @Param kitchen_id path string true "Kitchen ID"
+// @Param start_date query string true "start date"
+// @Param end_date query string true "end date"
 // @Success 200 {object} extra.Statistics
 // @Failure 400 {object} string "Invalid kitchen ID or date format"
 // @Failure 500 {object} string "Server error while processing request"
@@ -78,6 +80,8 @@ func (h *Handler) GetStatistics(c *gin.Context) {
 // @Description Informs about user's activity by date
 // @Tags user
 // @Param user_id path string true "User ID"
+// @Param start_date query string true "start date"
+// @Param end_date query string true "end date"
 // @Success 200 {object} extra.Activity
 // @Failure 400 {object} string "Invalid user ID or date format"
 // @Failure 500 {object} string "Server error while processing request"
@@ -140,6 +144,7 @@ func (h *Handler) TrackActivity(c *gin.Context) {
 // @Description Sets working hours for kitchen
 // @Tags kitchen
 // @Param kitchen_id path string true "Kitchen ID"
+// @Param schedule body map[string]*extra.DaySchedule true "Working hours"
 // @Success 200 {object} extra.WorkingHoursResp
 // @Failure 400 {object} string "Invalid kitchen ID or data"
 // @Failure 500 {object} string "Server error while processing request"

@@ -145,6 +145,98 @@ definitions:
       updated_at:
         type: string
     type: object
+  extra.Activity:
+    properties:
+      favorite_cuisines:
+        items:
+          $ref: '#/definitions/extra.Cuisine'
+        type: array
+      favorite_kitchens:
+        items:
+          $ref: '#/definitions/extra.Kitchen'
+        type: array
+      total_orders:
+        type: integer
+      total_spent:
+        type: number
+    type: object
+  extra.Cuisine:
+    properties:
+      cuisine_type:
+        type: string
+      orders_count:
+        type: integer
+    type: object
+  extra.DaySchedule:
+    properties:
+      close:
+        type: string
+      open:
+        type: string
+    type: object
+  extra.Dish:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      orders_count:
+        type: integer
+      revenue:
+        type: number
+    type: object
+  extra.Kitchen:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      orders_count:
+        type: integer
+    type: object
+  extra.NutritionalInfo:
+    properties:
+      allergens:
+        items:
+          type: string
+        type: array
+      calories:
+        type: integer
+      carbs:
+        type: integer
+      dietary_info:
+        items:
+          type: string
+        type: array
+      fat:
+        type: integer
+      protein:
+        type: integer
+    type: object
+  extra.Statistics:
+    properties:
+      average_rating:
+        type: number
+      top_dishes:
+        items:
+          $ref: '#/definitions/extra.Dish'
+        type: array
+      total_orders:
+        type: integer
+      total_revenue:
+        type: number
+    type: object
+  extra.WorkingHoursResp:
+    properties:
+      kitchen_id:
+        type: string
+      schedule:
+        additionalProperties:
+          $ref: '#/definitions/extra.DaySchedule'
+        type: object
+      updated_at:
+        type: string
+    type: object
   kitchen.CreateRequest:
     properties:
       address:
@@ -664,6 +756,31 @@ paths:
       summary: Updates a dish
       tags:
       - dish
+  /local-eats/dishes/{id}/nutrition-info:
+    get:
+      description: Informs about dish's nutritional value
+      parameters:
+      - description: Dish ID
+        in: path
+        name: dish_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/extra.NutritionalInfo'
+        "400":
+          description: Invalid dish ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Gets dish's nutrition info
+      tags:
+      - dish
   /local-eats/kitchens:
     get:
       description: Fetches all kitchens from database
@@ -866,6 +983,56 @@ paths:
       summary: Gets reviews
       tags:
       - review
+  /local-eats/kitchens/{id}/statistics:
+    get:
+      description: Informs about kitchen statistics by date
+      parameters:
+      - description: Kitchen ID
+        in: path
+        name: kitchen_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/extra.Statistics'
+        "400":
+          description: Invalid kitchen ID or date format
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Gets kitchen's statistics
+      tags:
+      - kitchen
+  /local-eats/kitchens/{id}/working-hours:
+    post:
+      description: Sets working hours for kitchen
+      parameters:
+      - description: Kitchen ID
+        in: path
+        name: kitchen_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/extra.WorkingHoursResp'
+        "400":
+          description: Invalid kitchen ID or data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Sets working hours
+      tags:
+      - kitchen
   /local-eats/kitchens/search:
     get:
       description: Searches kitchens from database
@@ -1158,6 +1325,31 @@ paths:
           schema:
             type: string
       summary: Updates a user
+      tags:
+      - user
+  /local-eats/users/{id}/activity:
+    get:
+      description: Informs about user's activity by date
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/extra.Activity'
+        "400":
+          description: Invalid user ID or date format
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Tracks user's activity
       tags:
       - user
 securityDefinitions:
