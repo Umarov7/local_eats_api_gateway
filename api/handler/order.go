@@ -146,7 +146,8 @@ func (h *Handler) ChangeStatus(c *gin.Context) {
 // @Description Gets orders from database
 // @Tags order
 // @Security ApiKeyAuth
-// @Param pagination query string true "Pagination"
+// @Param page query int true "Page number"
+// @Param limit query int true "Number of items per page"
 // @Success 200 {object} order.OrdersCustomer
 // @Failure 500 {object} string "Server error while processing request"
 // @Router /orders [get]
@@ -198,7 +199,10 @@ func (h *Handler) FetchOrdersForCustomer(c *gin.Context) {
 // @Description Gets orders from database
 // @Tags order
 // @Security ApiKeyAuth
-// @Param filter query string true "Filter"
+// @Param id path string true "Kitchen ID"
+// @Param status query string true "Status"
+// @Param page query int true "Page number"
+// @Param limit query int true "Number of items per page"
 // @Success 200 {object} order.OrdersKitchen
 // @Failure 500 {object} string "Server error while processing request"
 // @Router /kitchens/{id}/orders [get]

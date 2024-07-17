@@ -577,8 +577,29 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Filter",
-                        "name": "filter",
+                        "description": "Kitchen ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Status",
+                        "name": "status",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of items per page",
+                        "name": "limit",
                         "in": "query",
                         "required": true
                     }
@@ -616,6 +637,20 @@ const docTemplate = `{
                         "type": "string",
                         "description": "Kitchen ID",
                         "name": "id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of items per page",
+                        "name": "limit",
                         "in": "query",
                         "required": true
                     }
@@ -768,9 +803,16 @@ const docTemplate = `{
                 "summary": "Gets orders for customer",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "Pagination",
-                        "name": "pagination",
+                        "type": "integer",
+                        "description": "Page number",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of items per page",
+                        "name": "limit",
                         "in": "query",
                         "required": true
                     }

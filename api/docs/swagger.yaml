@@ -964,11 +964,26 @@ paths:
     get:
       description: Gets orders from database
       parameters:
-      - description: Filter
-        in: query
-        name: filter
+      - description: Kitchen ID
+        in: path
+        name: id
         required: true
         type: string
+      - description: Status
+        in: query
+        name: status
+        required: true
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Number of items per page
+        in: query
+        name: limit
+        required: true
+        type: integer
       responses:
         "200":
           description: OK
@@ -992,6 +1007,16 @@ paths:
         name: id
         required: true
         type: string
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Number of items per page
+        in: query
+        name: limit
+        required: true
+        type: integer
       responses:
         "200":
           description: OK
@@ -1124,11 +1149,16 @@ paths:
     get:
       description: Gets orders from database
       parameters:
-      - description: Pagination
+      - description: Page number
         in: query
-        name: pagination
+        name: page
         required: true
-        type: string
+        type: integer
+      - description: Number of items per page
+        in: query
+        name: limit
+        required: true
+        type: integer
       responses:
         "200":
           description: OK

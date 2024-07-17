@@ -55,6 +55,8 @@ func (h *Handler) CreateReview(c *gin.Context) {
 // @Tags review
 // @Security ApiKeyAuth
 // @Param id query string true "Kitchen ID"
+// @Param page query int true "Page number"
+// @Param limit query int true "Number of items per page"
 // @Success 200 {object} review.Reviews
 // @Failure 400 {object} string "Invalid review data"
 // @Failure 500 {object} string "Server error while processing request"

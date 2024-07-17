@@ -4,6 +4,7 @@ import (
 	pb "api-gateway/genproto/dish"
 	"context"
 	"net/http"
+	"strconv"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -194,9 +195,21 @@ func (h *Handler) DeleteDish(c *gin.Context) {
 func (h *Handler) FetchDishes(c *gin.Context) {
 	h.Logger.Info("FetchDishes method is starting")
 
-	var data pb.Pagination
-	if err := c.ShouldBindQuery(&data); err != nil {
-		er := errors.Wrap(err, "invalid pagination data").Error()
+	page := c.Query("page")
+	limit := c.Query("limit")
+
+	p, err := strconv.Atoi(page)
+	if err != nil {
+		er := errors.Wrap(err, "invalid pagination parameters").Error()
+		c.AbortWithStatusJSON(http.StatusBadRequest,
+			gin.H{"error": er})
+		h.Logger.Error(er)
+		return
+	}
+
+	l, err := strconv.Atoi(limit)
+	if err != nil {
+		er := errors.Wrap(err, "invalid pagination parameters").Error()
 		c.AbortWithStatusJSON(http.StatusBadRequest,
 			gin.H{"error": er})
 		h.Logger.Error(er)
@@ -206,7 +219,10 @@ func (h *Handler) FetchDishes(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(c, time.Second*5)
 	defer cancel()
 
-	res, err := h.DishClient.Fetch(ctx, &data)
+	res, err := h.DishClient.Fetch(ctx, &pb.Pagination{
+		Limit:  int32(l),
+		Offset: int32((p - 1) * l),
+	})
 	if err != nil {
 		er := errors.Wrap(err, "error getting dishes").Error()
 		c.AbortWithStatusJSON(http.StatusInternalServerError,
