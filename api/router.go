@@ -35,6 +35,7 @@ func NewRouter(cfg *config.Config) *gin.Engine {
 		u.GET(":id", h.GetUser)
 		u.PUT(":id", h.UpdateUser)
 		u.DELETE(":id", h.DeleteUser)
+		u.GET(":id/activity", h.TrackActivity)
 	}
 
 	k := api.Group("/kitchens")
@@ -48,6 +49,8 @@ func NewRouter(cfg *config.Config) *gin.Engine {
 		k.GET(":id/dishes", h.FetchDishes)
 		k.GET(":id/orders", h.FetchOrdersForKitchen)
 		k.GET(":id/reviews", h.GetReviews)
+		k.GET(":id/statistics", h.GetStatistics)
+		k.POST(":id/working-hours", h.SetWorkingHours)
 	}
 
 	d := api.Group("/dishes")
@@ -56,6 +59,7 @@ func NewRouter(cfg *config.Config) *gin.Engine {
 		d.GET(":id", h.GetDish)
 		d.PUT(":id", h.UpdateDish)
 		d.DELETE(":id", h.DeleteDish)
+		d.GET(":id/nutrition-info", h.GetNutrition)
 	}
 
 	o := api.Group("/orders")

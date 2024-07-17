@@ -3,6 +3,7 @@ package handler
 import (
 	"api-gateway/config"
 	"api-gateway/genproto/dish"
+	"api-gateway/genproto/extra"
 	"api-gateway/genproto/kitchen"
 	"api-gateway/genproto/order"
 	"api-gateway/genproto/payment"
@@ -20,6 +21,7 @@ type Handler struct {
 	OrderClient   order.OrderClient
 	ReviewClient  review.ReviewClient
 	PaymentClient payment.PaymentClient
+	ExtraClient   extra.ExtraClient
 	Logger        *slog.Logger
 }
 
@@ -31,6 +33,7 @@ func NewHandler(cfg *config.Config) *Handler {
 		OrderClient:   pkg.NewOrderClient(cfg),
 		ReviewClient:  pkg.NewReviewClient(cfg),
 		PaymentClient: pkg.NewPaymentClient(cfg),
+		ExtraClient:   pkg.NewExtraClient(cfg),
 		Logger:        logger.NewLogger(),
 	}
 }

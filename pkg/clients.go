@@ -3,6 +3,7 @@ package pkg
 import (
 	"api-gateway/config"
 	pbd "api-gateway/genproto/dish"
+	pbe "api-gateway/genproto/extra"
 	pbk "api-gateway/genproto/kitchen"
 	pbo "api-gateway/genproto/order"
 	pbp "api-gateway/genproto/payment"
@@ -91,4 +92,17 @@ func NewPaymentClient(cfg *config.Config) pbp.PaymentClient {
 	}
 
 	return pbp.NewPaymentClient(conn)
+}
+
+func NewExtraClient(cfg *config.Config) pbe.ExtraClient {
+	conn, err := grpc.NewClient(cfg.ORDER_SERVICE_PORT,
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+	)
+
+	if err != nil {
+		log.Println(errors.Wrap(err, "failed to connect to the address"))
+		return nil
+	}
+
+	return pbe.NewExtraClient(conn)
 }
