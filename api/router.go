@@ -45,7 +45,7 @@ func NewRouter(cfg *config.Config) *gin.Engine {
 		k.PUT(":id", h.UpdateKitchen)
 		k.DELETE(":id", h.DeleteKitchen)
 		k.GET("", h.FetchKitchens)
-		k.GET(":id/search", h.SearchKitchens)
+		k.GET("/search", h.SearchKitchens)
 		k.GET(":id/dishes", h.FetchDishes)
 		k.GET(":id/orders", h.FetchOrdersForKitchen)
 		k.GET(":id/reviews", h.GetReviews)
