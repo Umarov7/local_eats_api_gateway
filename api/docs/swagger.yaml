@@ -1,0 +1,1168 @@
+definitions:
+  dish.DishDetails:
+    properties:
+      available:
+        type: boolean
+      category:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  dish.DishInfo:
+    properties:
+      allergens:
+        items:
+          type: string
+        type: array
+      available:
+        type: boolean
+      category:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      dietary_info:
+        items:
+          type: string
+        type: array
+      id:
+        type: string
+      ingredients:
+        items:
+          type: string
+        type: array
+      kitchen_id:
+        type: string
+      name:
+        type: string
+      nutrition_info:
+        $ref: '#/definitions/dish.NutritionalInfo'
+      price:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  dish.Dishes:
+    properties:
+      dishes:
+        items:
+          $ref: '#/definitions/dish.DishDetails'
+        type: array
+      limit:
+        type: integer
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  dish.NewDataNoID:
+    properties:
+      available:
+        type: boolean
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  dish.NewDish:
+    properties:
+      available:
+        type: boolean
+      category:
+        type: string
+      description:
+        type: string
+      ingredients:
+        items:
+          type: string
+        type: array
+      kitchen_id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  dish.NewDishResp:
+    properties:
+      available:
+        type: boolean
+      category:
+        type: string
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      ingredients:
+        items:
+          type: string
+        type: array
+      kitchen_id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+    type: object
+  dish.NutritionalInfo:
+    properties:
+      calories:
+        type: integer
+      carbs:
+        type: integer
+      fat:
+        type: integer
+      protein:
+        type: integer
+    type: object
+  dish.UpdatedData:
+    properties:
+      available:
+        type: boolean
+      category:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      ingredients:
+        items:
+          type: string
+        type: array
+      kitchen_id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  kitchen.CreateRequest:
+    properties:
+      address:
+        type: string
+      cuisine_type:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      owner_id:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  kitchen.CreateResponse:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      cuisine_type:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      owner_id:
+        type: string
+      phone_number:
+        type: string
+      rating:
+        type: number
+    type: object
+  kitchen.Info:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      cuisine_type:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      owner_id:
+        type: string
+      phone_number:
+        type: string
+      rating:
+        type: number
+      total_orders:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  kitchen.KitchenDetails:
+    properties:
+      cuisine_type:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      rating:
+        type: number
+      total_orders:
+        type: integer
+    type: object
+  kitchen.Kitchens:
+    properties:
+      kitchens:
+        items:
+          $ref: '#/definitions/kitchen.KitchenDetails'
+        type: array
+      limit:
+        type: integer
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  kitchen.NewDataNoID:
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  kitchen.UpdatedData:
+    properties:
+      address:
+        type: string
+      cuisine_type:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      owner_id:
+        type: string
+      phone_number:
+        type: string
+      rating:
+        type: number
+      updated_at:
+        type: string
+    type: object
+  order.Item:
+    properties:
+      dish_id:
+        type: string
+      quantity:
+        type: integer
+    type: object
+  order.ItemDetails:
+    properties:
+      dish_id:
+        type: string
+      name:
+        type: string
+      price:
+        type: number
+      quantity:
+        type: integer
+    type: object
+  order.NewOrder:
+    properties:
+      delivery_address:
+        type: string
+      delivery_time:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/order.Item'
+        type: array
+      kitchen_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  order.NewOrderResp:
+    properties:
+      created_at:
+        type: string
+      delivery_address:
+        type: string
+      delivery_time:
+        type: string
+      id:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/order.Item'
+        type: array
+      kitchen_id:
+        type: string
+      status:
+        type: string
+      total_amount:
+        type: number
+      user_id:
+        type: string
+    type: object
+  order.OrderCustomer:
+    properties:
+      delivery_time:
+        type: string
+      id:
+        type: string
+      kitchen_name:
+        type: string
+      status:
+        type: string
+      total_amount:
+        type: number
+    type: object
+  order.OrderInfo:
+    properties:
+      created_at:
+        type: string
+      delivery_address:
+        type: string
+      delivery_time:
+        type: string
+      id:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/order.ItemDetails'
+        type: array
+      kitchen_id:
+        type: string
+      kitchen_name:
+        type: string
+      status:
+        type: string
+      total_amount:
+        type: number
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  order.OrderKitchen:
+    properties:
+      delivery_time:
+        type: string
+      id:
+        type: string
+      status:
+        type: string
+      total_amount:
+        type: number
+      user_name:
+        type: string
+    type: object
+  order.OrdersCustomer:
+    properties:
+      limit:
+        type: integer
+      orders:
+        items:
+          $ref: '#/definitions/order.OrderCustomer'
+        type: array
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  order.OrdersKitchen:
+    properties:
+      limit:
+        type: integer
+      orders:
+        items:
+          $ref: '#/definitions/order.OrderKitchen'
+        type: array
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  order.StatusNoID:
+    properties:
+      status:
+        type: string
+    type: object
+  order.UpdatedOrder:
+    properties:
+      id:
+        type: string
+      status:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  payment.NewPayment:
+    properties:
+      card_number:
+        type: string
+      cvv:
+        type: string
+      expiry_date:
+        type: string
+      order_id:
+        type: string
+      payment_method:
+        type: string
+    type: object
+  payment.PaymentDetails:
+    properties:
+      amount:
+        type: number
+      card_number:
+        type: string
+      created_at:
+        type: string
+      cvv:
+        type: string
+      expiry_date:
+        type: string
+      id:
+        type: string
+      method:
+        type: string
+      order_id:
+        type: string
+      status:
+        type: string
+      transaction_id:
+        type: string
+    type: object
+  review.NewReview:
+    properties:
+      comment:
+        type: string
+      order_id:
+        type: string
+      rating:
+        type: number
+    type: object
+  review.NewReviewResp:
+    properties:
+      comment:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      kitchen_id:
+        type: string
+      order_id:
+        type: string
+      rating:
+        type: number
+      user_id:
+        type: string
+    type: object
+  review.ReviewDetails:
+    properties:
+      comment:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      rating:
+        type: number
+      user_name:
+        type: string
+    type: object
+  review.Reviews:
+    properties:
+      average_rating:
+        type: number
+      limit:
+        type: integer
+      page:
+        type: integer
+      reviews:
+        items:
+          $ref: '#/definitions/review.ReviewDetails'
+        type: array
+      total:
+        type: integer
+    type: object
+  user.Details:
+    properties:
+      address:
+        type: string
+      email:
+        type: string
+      full_name:
+        type: string
+      id:
+        type: string
+      phone_number:
+        type: string
+      updated_at:
+        type: string
+      user_type:
+        type: string
+      username:
+        type: string
+    type: object
+  user.NewInfoNoID:
+    properties:
+      address:
+        type: string
+      full_name:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  user.Profile:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      email:
+        type: string
+      full_name:
+        type: string
+      id:
+        type: string
+      phone_number:
+        type: string
+      updated_at:
+        type: string
+      user_type:
+        type: string
+      username:
+        type: string
+    type: object
+  user.Void:
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API Gateway of Local Eats
+  title: Local Eats
+  version: "1.0"
+paths:
+  /local-eats/dishes:
+    post:
+      description: Inserts a new dish into database
+      parameters:
+      - description: Dish info
+        in: body
+        name: dish
+        required: true
+        schema:
+          $ref: '#/definitions/dish.NewDish'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dish.NewDishResp'
+        "400":
+          description: Invalid dish data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Creates a dish
+      tags:
+      - dish
+  /local-eats/dishes/{id}:
+    delete:
+      description: Deletes dish from database
+      parameters:
+      - description: Dish ID
+        in: path
+        name: dish_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Invalid dish ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Deletes a dish
+      tags:
+      - dish
+    get:
+      description: Retrieves dish info from database
+      parameters:
+      - description: Dish ID
+        in: path
+        name: dish_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dish.DishInfo'
+        "400":
+          description: Invalid dish ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Gets a dish
+      tags:
+      - dish
+    put:
+      description: Updates dish info in database
+      parameters:
+      - description: Dish ID
+        in: path
+        name: dish_id
+        required: true
+        type: string
+      - description: Dish info
+        in: body
+        name: dish
+        required: true
+        schema:
+          $ref: '#/definitions/dish.NewDataNoID'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dish.UpdatedData'
+        "400":
+          description: Invalid dish ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Updates a dish
+      tags:
+      - dish
+  /local-eats/kitchens:
+    get:
+      description: Fetches all kitchens from database
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Number of items per page
+        in: query
+        name: limit
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kitchen.Kitchens'
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Fetches all kitchens
+      tags:
+      - kitchen
+    post:
+      description: Inserts a new kitchen into database
+      parameters:
+      - description: Kitchen info
+        in: body
+        name: kitchen
+        required: true
+        schema:
+          $ref: '#/definitions/kitchen.CreateRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kitchen.CreateResponse'
+        "400":
+          description: Invalid kitchen data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Creates a kitchen
+      tags:
+      - kitchen
+  /local-eats/kitchens/{id}:
+    delete:
+      description: Deletes kitchen from database
+      parameters:
+      - description: Kitchen ID
+        in: path
+        name: kitchen_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Invalid kitchen ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Deletes a kitchen
+      tags:
+      - kitchen
+    get:
+      description: Retrieves kitchen info from database
+      parameters:
+      - description: Kitchen ID
+        in: path
+        name: kitchen_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kitchen.Info'
+        "400":
+          description: Invalid kitchen ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Gets a kitchen
+      tags:
+      - kitchen
+    put:
+      description: Updates kitchen info in database
+      parameters:
+      - description: Kitchen ID
+        in: path
+        name: kitchen_id
+        required: true
+        type: string
+      - description: Kitchen info
+        in: body
+        name: kitchen
+        required: true
+        schema:
+          $ref: '#/definitions/kitchen.NewDataNoID'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kitchen.UpdatedData'
+        "400":
+          description: Invalid kitchen ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Updates a kitchen
+      tags:
+      - kitchen
+  /local-eats/kitchens/{id}/dishes:
+    get:
+      description: Retrieves dishes info from database
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: Number of items per page
+        in: query
+        name: limit
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dish.Dishes'
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Gets dishes
+      tags:
+      - kitchen
+  /local-eats/kitchens/{id}/orders:
+    get:
+      description: Gets orders from database
+      parameters:
+      - description: Filter
+        in: query
+        name: filter
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/order.OrdersKitchen'
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Gets orders for kitchen
+      tags:
+      - order
+  /local-eats/kitchens/{id}/reviews:
+    get:
+      description: Gets reviews from database
+      parameters:
+      - description: Kitchen ID
+        in: query
+        name: kitchen_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/review.Reviews'
+        "400":
+          description: Invalid review data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Gets reviews
+      tags:
+      - review
+  /local-eats/kitchens/search:
+    get:
+      description: Searches kitchens from database
+      parameters:
+      - description: Search query
+        in: query
+        name: query
+        type: string
+      - description: Cuisine type
+        in: query
+        name: cuisine_type
+        type: string
+      - description: Rating
+        in: query
+        name: rating
+        type: number
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Number of items per page
+        in: query
+        name: limit
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/kitchen.Kitchens'
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Searches kitchens
+      tags:
+      - kitchen
+  /local-eats/orders:
+    get:
+      description: Gets orders from database
+      parameters:
+      - description: Pagination
+        in: query
+        name: pagination
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/order.OrdersCustomer'
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Gets orders for customer
+      tags:
+      - order
+    post:
+      description: Inserts a new order into database
+      parameters:
+      - description: Order info
+        in: body
+        name: order
+        required: true
+        schema:
+          $ref: '#/definitions/order.NewOrder'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/order.NewOrderResp'
+        "400":
+          description: Invalid order data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Creates an order
+      tags:
+      - order
+  /local-eats/orders/{id}:
+    get:
+      description: Gets order from database
+      parameters:
+      - description: Order ID
+        in: path
+        name: order_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/order.OrderInfo'
+        "400":
+          description: Invalid order ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Gets an order
+      tags:
+      - order
+  /local-eats/orders/{id}/status:
+    put:
+      description: Updates order status in database
+      parameters:
+      - description: Order ID
+        in: path
+        name: order_id
+        required: true
+        type: string
+      - description: Order status
+        in: body
+        name: status
+        required: true
+        schema:
+          $ref: '#/definitions/order.StatusNoID'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/order.UpdatedOrder'
+        "400":
+          description: Invalid order ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Updates an order
+      tags:
+      - order
+  /local-eats/payments:
+    post:
+      description: Inserts a new payment into database
+      parameters:
+      - description: Payment info
+        in: body
+        name: payment
+        required: true
+        schema:
+          $ref: '#/definitions/payment.NewPayment'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/payment.NewPayment'
+        "400":
+          description: Invalid payment data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Creates a payment
+      tags:
+      - payment
+  /local-eats/payments/{id}:
+    get:
+      description: Retrieves payment info from database
+      parameters:
+      - description: Payment ID
+        in: path
+        name: payment_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/payment.PaymentDetails'
+        "400":
+          description: Invalid payment ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Gets a payment
+      tags:
+      - payment
+  /local-eats/reviews:
+    post:
+      description: Inserts a new review into database
+      parameters:
+      - description: Review info
+        in: body
+        name: review
+        required: true
+        schema:
+          $ref: '#/definitions/review.NewReview'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/review.NewReviewResp'
+        "400":
+          description: Invalid review data
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Creates a review
+      tags:
+      - review
+  /local-eats/users/{id}:
+    delete:
+      description: Deletes user from database
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.Void'
+        "400":
+          description: Invalid user ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Deletes a user
+      tags:
+      - user
+    get:
+      description: Retrieves user info from database
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.Profile'
+        "400":
+          description: Invalid user ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Gets a user
+      tags:
+      - user
+    put:
+      description: Updates user info in database
+      parameters:
+      - description: User ID
+        in: path
+        name: user_id
+        required: true
+        type: string
+      - description: User info
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/user.NewInfoNoID'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.Details'
+        "400":
+          description: Invalid user ID
+          schema:
+            type: string
+        "500":
+          description: Server error while processing request
+          schema:
+            type: string
+      summary: Updates a user
+      tags:
+      - user
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
