@@ -16,11 +16,11 @@ import (
 // @version 1.0
 // @description API Gateway of Local Eats
 // @host localhost:8080
+// @BasePath /local-eats
+// @schemes http
 // @securityDefinitions.apikey ApiKeyAuth
 // @in header
 // @name Authorization
-// @schemes http
-// @BasePath /
 func NewRouter(cfg *config.Config) *gin.Engine {
 	h := handler.NewHandler(cfg)
 
@@ -59,7 +59,7 @@ func NewRouter(cfg *config.Config) *gin.Engine {
 		d.GET(":id", h.GetDish)
 		d.PUT(":id", h.UpdateDish)
 		d.DELETE(":id", h.DeleteDish)
-		d.GET(":id/nutrition-info", h.GetNutrition)
+		d.GET(":id/nutrition", h.GetNutrition)
 	}
 
 	o := api.Group("/orders")

@@ -1,4 +1,7 @@
 {
+    "schemes": [
+        "http"
+    ],
     "swagger": "2.0",
     "info": {
         "description": "API Gateway of Local Eats",
@@ -7,9 +10,15 @@
         "version": "1.0"
     },
     "host": "localhost:8080",
+    "basePath": "/local-eats",
     "paths": {
-        "/local-eats/dishes": {
+        "/dishes": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Inserts a new dish into database",
                 "tags": [
                     "dish"
@@ -48,8 +57,13 @@
                 }
             }
         },
-        "/local-eats/dishes/{id}": {
+        "/dishes/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves dish info from database",
                 "tags": [
                     "dish"
@@ -59,7 +73,7 @@
                     {
                         "type": "string",
                         "description": "Dish ID",
-                        "name": "dish_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -86,6 +100,11 @@
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Updates dish info in database",
                 "tags": [
                     "dish"
@@ -95,7 +114,7 @@
                     {
                         "type": "string",
                         "description": "Dish ID",
-                        "name": "dish_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     },
@@ -131,6 +150,11 @@
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Deletes dish from database",
                 "tags": [
                     "dish"
@@ -140,7 +164,7 @@
                     {
                         "type": "string",
                         "description": "Dish ID",
-                        "name": "dish_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -167,8 +191,13 @@
                 }
             }
         },
-        "/local-eats/dishes/{id}/nutrition-info": {
+        "/dishes/{id}/nutrition": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Informs about dish's nutritional value",
                 "tags": [
                     "dish"
@@ -178,7 +207,7 @@
                     {
                         "type": "string",
                         "description": "Dish ID",
-                        "name": "dish_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -205,8 +234,13 @@
                 }
             }
         },
-        "/local-eats/kitchens": {
+        "/kitchens": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Fetches all kitchens from database",
                 "tags": [
                     "kitchen"
@@ -244,6 +278,11 @@
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Inserts a new kitchen into database",
                 "tags": [
                     "kitchen"
@@ -282,8 +321,13 @@
                 }
             }
         },
-        "/local-eats/kitchens/search": {
+        "/kitchens/search": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Searches kitchens from database",
                 "tags": [
                     "kitchen"
@@ -337,8 +381,13 @@
                 }
             }
         },
-        "/local-eats/kitchens/{id}": {
+        "/kitchens/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves kitchen info from database",
                 "tags": [
                     "kitchen"
@@ -348,7 +397,7 @@
                     {
                         "type": "string",
                         "description": "Kitchen ID",
-                        "name": "kitchen_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -375,6 +424,11 @@
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Updates kitchen info in database",
                 "tags": [
                     "kitchen"
@@ -384,7 +438,7 @@
                     {
                         "type": "string",
                         "description": "Kitchen ID",
-                        "name": "kitchen_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     },
@@ -420,6 +474,11 @@
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Deletes kitchen from database",
                 "tags": [
                     "kitchen"
@@ -429,7 +488,7 @@
                     {
                         "type": "string",
                         "description": "Kitchen ID",
-                        "name": "kitchen_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -456,8 +515,13 @@
                 }
             }
         },
-        "/local-eats/kitchens/{id}/dishes": {
+        "/kitchens/{id}/dishes": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves dishes info from database",
                 "tags": [
                     "kitchen"
@@ -495,8 +559,13 @@
                 }
             }
         },
-        "/local-eats/kitchens/{id}/orders": {
+        "/kitchens/{id}/orders": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Gets orders from database",
                 "tags": [
                     "order"
@@ -527,8 +596,13 @@
                 }
             }
         },
-        "/local-eats/kitchens/{id}/reviews": {
+        "/kitchens/{id}/reviews": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Gets reviews from database",
                 "tags": [
                     "review"
@@ -538,7 +612,7 @@
                     {
                         "type": "string",
                         "description": "Kitchen ID",
-                        "name": "kitchen_id",
+                        "name": "id",
                         "in": "query",
                         "required": true
                     }
@@ -565,8 +639,13 @@
                 }
             }
         },
-        "/local-eats/kitchens/{id}/statistics": {
+        "/kitchens/{id}/statistics": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Informs about kitchen statistics by date",
                 "tags": [
                     "kitchen"
@@ -576,8 +655,22 @@
                     {
                         "type": "string",
                         "description": "Kitchen ID",
-                        "name": "kitchen_id",
+                        "name": "id",
                         "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "start date",
+                        "name": "start_date",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "end date",
+                        "name": "end_date",
+                        "in": "query",
                         "required": true
                     }
                 ],
@@ -603,8 +696,13 @@
                 }
             }
         },
-        "/local-eats/kitchens/{id}/working-hours": {
+        "/kitchens/{id}/working-hours": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Sets working hours for kitchen",
                 "tags": [
                     "kitchen"
@@ -614,9 +712,21 @@
                     {
                         "type": "string",
                         "description": "Kitchen ID",
-                        "name": "kitchen_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Working hours",
+                        "name": "schedule",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "$ref": "#/definitions/extra.DaySchedule"
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -641,8 +751,13 @@
                 }
             }
         },
-        "/local-eats/orders": {
+        "/orders": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Gets orders from database",
                 "tags": [
                     "order"
@@ -673,6 +788,11 @@
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Inserts a new order into database",
                 "tags": [
                     "order"
@@ -711,8 +831,13 @@
                 }
             }
         },
-        "/local-eats/orders/{id}": {
+        "/orders/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Gets order from database",
                 "tags": [
                     "order"
@@ -722,7 +847,7 @@
                     {
                         "type": "string",
                         "description": "Order ID",
-                        "name": "order_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -749,8 +874,13 @@
                 }
             }
         },
-        "/local-eats/orders/{id}/status": {
+        "/orders/{id}/status": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Updates order status in database",
                 "tags": [
                     "order"
@@ -760,7 +890,7 @@
                     {
                         "type": "string",
                         "description": "Order ID",
-                        "name": "order_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     },
@@ -796,8 +926,13 @@
                 }
             }
         },
-        "/local-eats/payments": {
+        "/payments": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Inserts a new payment into database",
                 "tags": [
                     "payment"
@@ -836,8 +971,13 @@
                 }
             }
         },
-        "/local-eats/payments/{id}": {
+        "/payments/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves payment info from database",
                 "tags": [
                     "payment"
@@ -847,7 +987,7 @@
                     {
                         "type": "string",
                         "description": "Payment ID",
-                        "name": "payment_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -874,8 +1014,13 @@
                 }
             }
         },
-        "/local-eats/reviews": {
+        "/reviews": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Inserts a new review into database",
                 "tags": [
                     "review"
@@ -914,8 +1059,13 @@
                 }
             }
         },
-        "/local-eats/users/{id}": {
+        "/users/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves user info from database",
                 "tags": [
                     "user"
@@ -925,7 +1075,7 @@
                     {
                         "type": "string",
                         "description": "User ID",
-                        "name": "user_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -952,6 +1102,11 @@
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Updates user info in database",
                 "tags": [
                     "user"
@@ -961,7 +1116,7 @@
                     {
                         "type": "string",
                         "description": "User ID",
-                        "name": "user_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     },
@@ -997,6 +1152,11 @@
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Deletes user from database",
                 "tags": [
                     "user"
@@ -1006,7 +1166,7 @@
                     {
                         "type": "string",
                         "description": "User ID",
-                        "name": "user_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -1033,8 +1193,13 @@
                 }
             }
         },
-        "/local-eats/users/{id}/activity": {
+        "/users/{id}/activity": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Informs about user's activity by date",
                 "tags": [
                     "user"
@@ -1044,8 +1209,22 @@
                     {
                         "type": "string",
                         "description": "User ID",
-                        "name": "user_id",
+                        "name": "id",
                         "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "start date",
+                        "name": "start_date",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "end date",
+                        "name": "end_date",
+                        "in": "query",
                         "required": true
                     }
                 ],

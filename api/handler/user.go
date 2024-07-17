@@ -15,11 +15,12 @@ import (
 // @Summary Gets a user
 // @Description Retrieves user info from database
 // @Tags user
-// @Param user_id path string true "User ID"
+// @Security ApiKeyAuth
+// @Param id path string true "User ID"
 // @Success 200 {object} user.Profile
 // @Failure 400 {object} string "Invalid user ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/users/{id} [get]
+// @Router /users/{id} [get]
 func (h *Handler) GetUser(c *gin.Context) {
 	h.Logger.Info("GetUser method is starting")
 
@@ -53,12 +54,13 @@ func (h *Handler) GetUser(c *gin.Context) {
 // @Summary Updates a user
 // @Description Updates user info in database
 // @Tags user
-// @Param user_id path string true "User ID"
+// @Security ApiKeyAuth
+// @Param id path string true "User ID"
 // @Param user body user.NewInfoNoID true "User info"
 // @Success 200 {object} user.Details
 // @Failure 400 {object} string "Invalid user ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/users/{id} [put]
+// @Router /users/{id} [put]
 func (h *Handler) UpdateUser(c *gin.Context) {
 	h.Logger.Info("UpdateUser method is starting")
 
@@ -106,11 +108,12 @@ func (h *Handler) UpdateUser(c *gin.Context) {
 // @Summary Deletes a user
 // @Description Deletes user from database
 // @Tags user
-// @Param user_id path string true "User ID"
+// @Security ApiKeyAuth
+// @Param id path string true "User ID"
 // @Success 200 {object} user.Void
 // @Failure 400 {object} string "Invalid user ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/users/{id} [delete]
+// @Router /users/{id} [delete]
 func (h *Handler) DeleteUser(c *gin.Context) {
 	h.Logger.Info("DeleteUser method is starting")
 

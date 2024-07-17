@@ -16,11 +16,12 @@ import (
 // @Summary Creates a review
 // @Description Inserts a new review into database
 // @Tags review
+// @Security ApiKeyAuth
 // @Param review body review.NewReview true "Review info"
 // @Success 200 {object} review.NewReviewResp
 // @Failure 400 {object} string "Invalid review data"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/reviews [post]
+// @Router /reviews [post]
 func (h *Handler) CreateReview(c *gin.Context) {
 	h.Logger.Info("CreateReview method is starting")
 
@@ -52,11 +53,12 @@ func (h *Handler) CreateReview(c *gin.Context) {
 // @Summary Gets reviews
 // @Description Gets reviews from database
 // @Tags review
-// @Param kitchen_id query string true "Kitchen ID"
+// @Security ApiKeyAuth
+// @Param id query string true "Kitchen ID"
 // @Success 200 {object} review.Reviews
 // @Failure 400 {object} string "Invalid review data"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/kitchens/{id}/reviews [get]
+// @Router /kitchens/{id}/reviews [get]
 func (h *Handler) GetReviews(c *gin.Context) {
 	h.Logger.Info("GetReviews method is starting")
 

@@ -15,11 +15,12 @@ import (
 // @Summary Creates a dish
 // @Description Inserts a new dish into database
 // @Tags dish
+// @Security ApiKeyAuth
 // @Param dish body dish.NewDish true "Dish info"
 // @Success 200 {object} dish.NewDishResp
 // @Failure 400 {object} string "Invalid dish data"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/dishes [post]
+// @Router /dishes [post]
 func (h *Handler) CreateDish(c *gin.Context) {
 	h.Logger.Info("CreateDish method is starting")
 
@@ -52,11 +53,12 @@ func (h *Handler) CreateDish(c *gin.Context) {
 // @Summary Gets a dish
 // @Description Retrieves dish info from database
 // @Tags dish
-// @Param dish_id path string true "Dish ID"
+// @Security ApiKeyAuth
+// @Param id path string true "Dish ID"
 // @Success 200 {object} dish.DishInfo
 // @Failure 400 {object} string "Invalid dish ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/dishes/{id} [get]
+// @Router /dishes/{id} [get]
 func (h *Handler) GetDish(c *gin.Context) {
 	h.Logger.Info("GetDish method is starting")
 
@@ -90,12 +92,13 @@ func (h *Handler) GetDish(c *gin.Context) {
 // @Summary Updates a dish
 // @Description Updates dish info in database
 // @Tags dish
-// @Param dish_id path string true "Dish ID"
+// @Security ApiKeyAuth
+// @Param id path string true "Dish ID"
 // @Param dish body dish.NewDataNoID true "Dish info"
 // @Success 200 {object} dish.UpdatedData
 // @Failure 400 {object} string "Invalid dish ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/dishes/{id} [put]
+// @Router /dishes/{id} [put]
 func (h *Handler) UpdateDish(c *gin.Context) {
 	h.Logger.Info("UpdateDish method is starting")
 
@@ -143,11 +146,12 @@ func (h *Handler) UpdateDish(c *gin.Context) {
 // @Summary Deletes a dish
 // @Description Deletes dish from database
 // @Tags dish
-// @Param dish_id path string true "Dish ID"
+// @Security ApiKeyAuth
+// @Param id path string true "Dish ID"
 // @Success 200 {object} string
 // @Failure 400 {object} string "Invalid dish ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/dishes/{id} [delete]
+// @Router /dishes/{id} [delete]
 func (h *Handler) DeleteDish(c *gin.Context) {
 	h.Logger.Info("DeleteDish method is starting")
 
@@ -164,7 +168,7 @@ func (h *Handler) DeleteDish(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(c, time.Second*5)
 	defer cancel()
 
-	res, err := h.DishClient.Delete(ctx, &pb.ID{Id: id})
+	_, err = h.DishClient.Delete(ctx, &pb.ID{Id: id})
 	if err != nil {
 		er := errors.Wrap(err, "error deleting dish").Error()
 		c.AbortWithStatusJSON(http.StatusInternalServerError,
@@ -174,18 +178,19 @@ func (h *Handler) DeleteDish(c *gin.Context) {
 	}
 
 	h.Logger.Info("DeleteDish method has finished successfully")
-	c.JSON(http.StatusOK, res)
+	c.JSON(http.StatusOK, "Dish deleted successfully")
 }
 
 // FetchDishes godoc
 // @Summary Gets dishes
 // @Description Retrieves dishes info from database
 // @Tags kitchen
+// @Security ApiKeyAuth
 // @Param page query int true "Page number"
 // @Param limit query int true "Number of items per page"
 // @Success 200 {object} dish.Dishes
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/kitchens/{id}/dishes [get]
+// @Router /kitchens/{id}/dishes [get]
 func (h *Handler) FetchDishes(c *gin.Context) {
 	h.Logger.Info("FetchDishes method is starting")
 

@@ -16,11 +16,12 @@ import (
 // @Summary Creates an order
 // @Description Inserts a new order into database
 // @Tags order
+// @Security ApiKeyAuth
 // @Param order body order.NewOrder true "Order info"
 // @Success 200 {object} order.NewOrderResp
 // @Failure 400 {object} string "Invalid order data"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/orders [post]
+// @Router /orders [post]
 func (h *Handler) CreateOrder(c *gin.Context) {
 	h.Logger.Info("CreateOrder method is starting")
 
@@ -53,11 +54,12 @@ func (h *Handler) CreateOrder(c *gin.Context) {
 // @Summary Gets an order
 // @Description Gets order from database
 // @Tags order
-// @Param order_id path string true "Order ID"
+// @Security ApiKeyAuth
+// @Param id path string true "Order ID"
 // @Success 200 {object} order.OrderInfo
 // @Failure 400 {object} string "Invalid order ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/orders/{id} [get]
+// @Router /orders/{id} [get]
 func (h *Handler) GetOrderByID(c *gin.Context) {
 	h.Logger.Info("GetOrderByID method is starting")
 
@@ -91,12 +93,13 @@ func (h *Handler) GetOrderByID(c *gin.Context) {
 // @Summary Updates an order
 // @Description Updates order status in database
 // @Tags order
-// @Param order_id path string true "Order ID"
+// @Security ApiKeyAuth
+// @Param id path string true "Order ID"
 // @Param status body order.StatusNoID true "Order status"
 // @Success 200 {object} order.UpdatedOrder
 // @Failure 400 {object} string "Invalid order ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/orders/{id}/status [put]
+// @Router /orders/{id}/status [put]
 func (h *Handler) ChangeStatus(c *gin.Context) {
 	h.Logger.Info("ChangeStatus method is starting")
 
@@ -142,10 +145,11 @@ func (h *Handler) ChangeStatus(c *gin.Context) {
 // @Summary Gets orders for customer
 // @Description Gets orders from database
 // @Tags order
+// @Security ApiKeyAuth
 // @Param pagination query string true "Pagination"
 // @Success 200 {object} order.OrdersCustomer
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/orders [get]
+// @Router /orders [get]
 func (h *Handler) FetchOrdersForCustomer(c *gin.Context) {
 	h.Logger.Info("FetchOrdersForCustomer method is starting")
 
@@ -193,10 +197,11 @@ func (h *Handler) FetchOrdersForCustomer(c *gin.Context) {
 // @Summary Gets orders for kitchen
 // @Description Gets orders from database
 // @Tags order
+// @Security ApiKeyAuth
 // @Param filter query string true "Filter"
 // @Success 200 {object} order.OrdersKitchen
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/kitchens/{id}/orders [get]
+// @Router /kitchens/{id}/orders [get]
 func (h *Handler) FetchOrdersForKitchen(c *gin.Context) {
 	h.Logger.Info("FetchOrdersForKitchen method is starting")
 

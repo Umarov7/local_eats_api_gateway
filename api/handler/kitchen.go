@@ -16,11 +16,12 @@ import (
 // @Summary Creates a kitchen
 // @Description Inserts a new kitchen into database
 // @Tags kitchen
+// @Security ApiKeyAuth
 // @Param kitchen body kitchen.CreateRequest true "Kitchen info"
 // @Success 200 {object} kitchen.CreateResponse
 // @Failure 400 {object} string "Invalid kitchen data"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/kitchens [post]
+// @Router /kitchens [post]
 func (h *Handler) CreateKitchen(c *gin.Context) {
 	h.Logger.Info("CreateKitchen method is starting")
 	var data pb.CreateRequest
@@ -53,11 +54,12 @@ func (h *Handler) CreateKitchen(c *gin.Context) {
 // @Summary Gets a kitchen
 // @Description Retrieves kitchen info from database
 // @Tags kitchen
-// @Param kitchen_id path string true "Kitchen ID"
+// @Security ApiKeyAuth
+// @Param id path string true "Kitchen ID"
 // @Success 200 {object} kitchen.Info
 // @Failure 400 {object} string "Invalid kitchen ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/kitchens/{id} [get]
+// @Router /kitchens/{id} [get]
 func (h *Handler) GetKitchen(c *gin.Context) {
 	h.Logger.Info("GetKitchen method is starting")
 
@@ -91,12 +93,13 @@ func (h *Handler) GetKitchen(c *gin.Context) {
 // @Summary Updates a kitchen
 // @Description Updates kitchen info in database
 // @Tags kitchen
-// @Param kitchen_id path string true "Kitchen ID"
+// @Security ApiKeyAuth
+// @Param id path string true "Kitchen ID"
 // @Param kitchen body kitchen.NewDataNoID true "Kitchen info"
 // @Success 200 {object} kitchen.UpdatedData
 // @Failure 400 {object} string "Invalid kitchen ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/kitchens/{id} [put]
+// @Router /kitchens/{id} [put]
 func (h *Handler) UpdateKitchen(c *gin.Context) {
 	h.Logger.Info("UpdateKitchen method is starting")
 
@@ -139,11 +142,12 @@ func (h *Handler) UpdateKitchen(c *gin.Context) {
 // @Summary Deletes a kitchen
 // @Description Deletes kitchen from database
 // @Tags kitchen
-// @Param kitchen_id path string true "Kitchen ID"
+// @Security ApiKeyAuth
+// @Param id path string true "Kitchen ID"
 // @Success 200 {object} string
 // @Failure 400 {object} string "Invalid kitchen ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/kitchens/{id} [delete]
+// @Router /kitchens/{id} [delete]
 func (h *Handler) DeleteKitchen(c *gin.Context) {
 	h.Logger.Info("DeleteKitchen method is starting")
 
@@ -177,11 +181,12 @@ func (h *Handler) DeleteKitchen(c *gin.Context) {
 // @Summary Fetches all kitchens
 // @Description Fetches all kitchens from database
 // @Tags kitchen
+// @Security ApiKeyAuth
 // @Param page query int true "Page number"
 // @Param limit query int true "Number of items per page"
 // @Success 200 {object} kitchen.Kitchens
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/kitchens [get]
+// @Router /kitchens [get]
 func (h *Handler) FetchKitchens(c *gin.Context) {
 	h.Logger.Info("FetchKitchens method is starting")
 
@@ -229,6 +234,7 @@ func (h *Handler) FetchKitchens(c *gin.Context) {
 // @Summary Searches kitchens
 // @Description Searches kitchens from database
 // @Tags kitchen
+// @Security ApiKeyAuth
 // @Param query query string false "Search query"
 // @Param cuisine_type query string false "Cuisine type"
 // @Param rating query float32 false "Rating"
@@ -236,7 +242,7 @@ func (h *Handler) FetchKitchens(c *gin.Context) {
 // @Param limit query int false "Number of items per page"
 // @Success 200 {object} kitchen.Kitchens
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/kitchens/search [get]
+// @Router /kitchens/search [get]
 func (h *Handler) SearchKitchens(c *gin.Context) {
 	h.Logger.Info("SearchKitchens method is starting")
 

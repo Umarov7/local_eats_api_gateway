@@ -15,8 +15,13 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/local-eats/dishes": {
+        "/dishes": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Inserts a new dish into database",
                 "tags": [
                     "dish"
@@ -55,8 +60,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/dishes/{id}": {
+        "/dishes/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves dish info from database",
                 "tags": [
                     "dish"
@@ -66,7 +76,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Dish ID",
-                        "name": "dish_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -93,6 +103,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Updates dish info in database",
                 "tags": [
                     "dish"
@@ -102,7 +117,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Dish ID",
-                        "name": "dish_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     },
@@ -138,6 +153,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Deletes dish from database",
                 "tags": [
                     "dish"
@@ -147,7 +167,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Dish ID",
-                        "name": "dish_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -174,8 +194,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/dishes/{id}/nutrition-info": {
+        "/dishes/{id}/nutrition": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Informs about dish's nutritional value",
                 "tags": [
                     "dish"
@@ -185,7 +210,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Dish ID",
-                        "name": "dish_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -212,8 +237,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/kitchens": {
+        "/kitchens": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Fetches all kitchens from database",
                 "tags": [
                     "kitchen"
@@ -251,6 +281,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Inserts a new kitchen into database",
                 "tags": [
                     "kitchen"
@@ -289,8 +324,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/kitchens/search": {
+        "/kitchens/search": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Searches kitchens from database",
                 "tags": [
                     "kitchen"
@@ -344,8 +384,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/kitchens/{id}": {
+        "/kitchens/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves kitchen info from database",
                 "tags": [
                     "kitchen"
@@ -355,7 +400,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Kitchen ID",
-                        "name": "kitchen_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -382,6 +427,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Updates kitchen info in database",
                 "tags": [
                     "kitchen"
@@ -391,7 +441,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Kitchen ID",
-                        "name": "kitchen_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     },
@@ -427,6 +477,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Deletes kitchen from database",
                 "tags": [
                     "kitchen"
@@ -436,7 +491,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Kitchen ID",
-                        "name": "kitchen_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -463,8 +518,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/kitchens/{id}/dishes": {
+        "/kitchens/{id}/dishes": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves dishes info from database",
                 "tags": [
                     "kitchen"
@@ -502,8 +562,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/kitchens/{id}/orders": {
+        "/kitchens/{id}/orders": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Gets orders from database",
                 "tags": [
                     "order"
@@ -534,8 +599,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/kitchens/{id}/reviews": {
+        "/kitchens/{id}/reviews": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Gets reviews from database",
                 "tags": [
                     "review"
@@ -545,7 +615,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Kitchen ID",
-                        "name": "kitchen_id",
+                        "name": "id",
                         "in": "query",
                         "required": true
                     }
@@ -572,8 +642,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/kitchens/{id}/statistics": {
+        "/kitchens/{id}/statistics": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Informs about kitchen statistics by date",
                 "tags": [
                     "kitchen"
@@ -583,8 +658,22 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Kitchen ID",
-                        "name": "kitchen_id",
+                        "name": "id",
                         "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "start date",
+                        "name": "start_date",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "end date",
+                        "name": "end_date",
+                        "in": "query",
                         "required": true
                     }
                 ],
@@ -610,8 +699,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/kitchens/{id}/working-hours": {
+        "/kitchens/{id}/working-hours": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Sets working hours for kitchen",
                 "tags": [
                     "kitchen"
@@ -621,9 +715,21 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Kitchen ID",
-                        "name": "kitchen_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Working hours",
+                        "name": "schedule",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "$ref": "#/definitions/extra.DaySchedule"
+                            }
+                        }
                     }
                 ],
                 "responses": {
@@ -648,8 +754,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/orders": {
+        "/orders": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Gets orders from database",
                 "tags": [
                     "order"
@@ -680,6 +791,11 @@ const docTemplate = `{
                 }
             },
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Inserts a new order into database",
                 "tags": [
                     "order"
@@ -718,8 +834,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/orders/{id}": {
+        "/orders/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Gets order from database",
                 "tags": [
                     "order"
@@ -729,7 +850,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Order ID",
-                        "name": "order_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -756,8 +877,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/orders/{id}/status": {
+        "/orders/{id}/status": {
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Updates order status in database",
                 "tags": [
                     "order"
@@ -767,7 +893,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Order ID",
-                        "name": "order_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     },
@@ -803,8 +929,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/payments": {
+        "/payments": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Inserts a new payment into database",
                 "tags": [
                     "payment"
@@ -843,8 +974,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/payments/{id}": {
+        "/payments/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves payment info from database",
                 "tags": [
                     "payment"
@@ -854,7 +990,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "Payment ID",
-                        "name": "payment_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -881,8 +1017,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/reviews": {
+        "/reviews": {
             "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Inserts a new review into database",
                 "tags": [
                     "review"
@@ -921,8 +1062,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/users/{id}": {
+        "/users/{id}": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Retrieves user info from database",
                 "tags": [
                     "user"
@@ -932,7 +1078,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "User ID",
-                        "name": "user_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -959,6 +1105,11 @@ const docTemplate = `{
                 }
             },
             "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Updates user info in database",
                 "tags": [
                     "user"
@@ -968,7 +1119,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "User ID",
-                        "name": "user_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     },
@@ -1004,6 +1155,11 @@ const docTemplate = `{
                 }
             },
             "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Deletes user from database",
                 "tags": [
                     "user"
@@ -1013,7 +1169,7 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "User ID",
-                        "name": "user_id",
+                        "name": "id",
                         "in": "path",
                         "required": true
                     }
@@ -1040,8 +1196,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/local-eats/users/{id}/activity": {
+        "/users/{id}/activity": {
             "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "description": "Informs about user's activity by date",
                 "tags": [
                     "user"
@@ -1051,8 +1212,22 @@ const docTemplate = `{
                     {
                         "type": "string",
                         "description": "User ID",
-                        "name": "user_id",
+                        "name": "id",
                         "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "start date",
+                        "name": "start_date",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "end date",
+                        "name": "end_date",
+                        "in": "query",
                         "required": true
                     }
                 ],
@@ -2083,8 +2258,8 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "localhost:8080",
-	BasePath:         "",
-	Schemes:          []string{},
+	BasePath:         "/local-eats",
+	Schemes:          []string{"http"},
 	Title:            "Local Eats",
 	Description:      "API Gateway of Local Eats",
 	InfoInstanceName: "swagger",

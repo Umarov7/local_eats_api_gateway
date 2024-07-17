@@ -1,3 +1,4 @@
+basePath: /local-eats
 definitions:
   dish.DishDetails:
     properties:
@@ -651,7 +652,7 @@ info:
   title: Local Eats
   version: "1.0"
 paths:
-  /local-eats/dishes:
+  /dishes:
     post:
       description: Inserts a new dish into database
       parameters:
@@ -674,16 +675,18 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Creates a dish
       tags:
       - dish
-  /local-eats/dishes/{id}:
+  /dishes/{id}:
     delete:
       description: Deletes dish from database
       parameters:
       - description: Dish ID
         in: path
-        name: dish_id
+        name: id
         required: true
         type: string
       responses:
@@ -699,6 +702,8 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Deletes a dish
       tags:
       - dish
@@ -707,7 +712,7 @@ paths:
       parameters:
       - description: Dish ID
         in: path
-        name: dish_id
+        name: id
         required: true
         type: string
       responses:
@@ -723,6 +728,8 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Gets a dish
       tags:
       - dish
@@ -731,7 +738,7 @@ paths:
       parameters:
       - description: Dish ID
         in: path
-        name: dish_id
+        name: id
         required: true
         type: string
       - description: Dish info
@@ -753,16 +760,18 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Updates a dish
       tags:
       - dish
-  /local-eats/dishes/{id}/nutrition-info:
+  /dishes/{id}/nutrition:
     get:
       description: Informs about dish's nutritional value
       parameters:
       - description: Dish ID
         in: path
-        name: dish_id
+        name: id
         required: true
         type: string
       responses:
@@ -778,10 +787,12 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Gets dish's nutrition info
       tags:
       - dish
-  /local-eats/kitchens:
+  /kitchens:
     get:
       description: Fetches all kitchens from database
       parameters:
@@ -804,6 +815,8 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Fetches all kitchens
       tags:
       - kitchen
@@ -829,16 +842,18 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Creates a kitchen
       tags:
       - kitchen
-  /local-eats/kitchens/{id}:
+  /kitchens/{id}:
     delete:
       description: Deletes kitchen from database
       parameters:
       - description: Kitchen ID
         in: path
-        name: kitchen_id
+        name: id
         required: true
         type: string
       responses:
@@ -854,6 +869,8 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Deletes a kitchen
       tags:
       - kitchen
@@ -862,7 +879,7 @@ paths:
       parameters:
       - description: Kitchen ID
         in: path
-        name: kitchen_id
+        name: id
         required: true
         type: string
       responses:
@@ -878,6 +895,8 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Gets a kitchen
       tags:
       - kitchen
@@ -886,7 +905,7 @@ paths:
       parameters:
       - description: Kitchen ID
         in: path
-        name: kitchen_id
+        name: id
         required: true
         type: string
       - description: Kitchen info
@@ -908,10 +927,12 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Updates a kitchen
       tags:
       - kitchen
-  /local-eats/kitchens/{id}/dishes:
+  /kitchens/{id}/dishes:
     get:
       description: Retrieves dishes info from database
       parameters:
@@ -934,10 +955,12 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Gets dishes
       tags:
       - kitchen
-  /local-eats/kitchens/{id}/orders:
+  /kitchens/{id}/orders:
     get:
       description: Gets orders from database
       parameters:
@@ -955,16 +978,18 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Gets orders for kitchen
       tags:
       - order
-  /local-eats/kitchens/{id}/reviews:
+  /kitchens/{id}/reviews:
     get:
       description: Gets reviews from database
       parameters:
       - description: Kitchen ID
         in: query
-        name: kitchen_id
+        name: id
         required: true
         type: string
       responses:
@@ -980,16 +1005,28 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Gets reviews
       tags:
       - review
-  /local-eats/kitchens/{id}/statistics:
+  /kitchens/{id}/statistics:
     get:
       description: Informs about kitchen statistics by date
       parameters:
       - description: Kitchen ID
         in: path
-        name: kitchen_id
+        name: id
+        required: true
+        type: string
+      - description: start date
+        in: query
+        name: start_date
+        required: true
+        type: string
+      - description: end date
+        in: query
+        name: end_date
         required: true
         type: string
       responses:
@@ -1005,18 +1042,28 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Gets kitchen's statistics
       tags:
       - kitchen
-  /local-eats/kitchens/{id}/working-hours:
+  /kitchens/{id}/working-hours:
     post:
       description: Sets working hours for kitchen
       parameters:
       - description: Kitchen ID
         in: path
-        name: kitchen_id
+        name: id
         required: true
         type: string
+      - description: Working hours
+        in: body
+        name: schedule
+        required: true
+        schema:
+          additionalProperties:
+            $ref: '#/definitions/extra.DaySchedule'
+          type: object
       responses:
         "200":
           description: OK
@@ -1030,10 +1077,12 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Sets working hours
       tags:
       - kitchen
-  /local-eats/kitchens/search:
+  /kitchens/search:
     get:
       description: Searches kitchens from database
       parameters:
@@ -1066,10 +1115,12 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Searches kitchens
       tags:
       - kitchen
-  /local-eats/orders:
+  /orders:
     get:
       description: Gets orders from database
       parameters:
@@ -1087,6 +1138,8 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Gets orders for customer
       tags:
       - order
@@ -1112,16 +1165,18 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Creates an order
       tags:
       - order
-  /local-eats/orders/{id}:
+  /orders/{id}:
     get:
       description: Gets order from database
       parameters:
       - description: Order ID
         in: path
-        name: order_id
+        name: id
         required: true
         type: string
       responses:
@@ -1137,16 +1192,18 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Gets an order
       tags:
       - order
-  /local-eats/orders/{id}/status:
+  /orders/{id}/status:
     put:
       description: Updates order status in database
       parameters:
       - description: Order ID
         in: path
-        name: order_id
+        name: id
         required: true
         type: string
       - description: Order status
@@ -1168,10 +1225,12 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Updates an order
       tags:
       - order
-  /local-eats/payments:
+  /payments:
     post:
       description: Inserts a new payment into database
       parameters:
@@ -1194,16 +1253,18 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Creates a payment
       tags:
       - payment
-  /local-eats/payments/{id}:
+  /payments/{id}:
     get:
       description: Retrieves payment info from database
       parameters:
       - description: Payment ID
         in: path
-        name: payment_id
+        name: id
         required: true
         type: string
       responses:
@@ -1219,10 +1280,12 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Gets a payment
       tags:
       - payment
-  /local-eats/reviews:
+  /reviews:
     post:
       description: Inserts a new review into database
       parameters:
@@ -1245,16 +1308,18 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Creates a review
       tags:
       - review
-  /local-eats/users/{id}:
+  /users/{id}:
     delete:
       description: Deletes user from database
       parameters:
       - description: User ID
         in: path
-        name: user_id
+        name: id
         required: true
         type: string
       responses:
@@ -1270,6 +1335,8 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Deletes a user
       tags:
       - user
@@ -1278,7 +1345,7 @@ paths:
       parameters:
       - description: User ID
         in: path
-        name: user_id
+        name: id
         required: true
         type: string
       responses:
@@ -1294,6 +1361,8 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Gets a user
       tags:
       - user
@@ -1302,7 +1371,7 @@ paths:
       parameters:
       - description: User ID
         in: path
-        name: user_id
+        name: id
         required: true
         type: string
       - description: User info
@@ -1324,16 +1393,28 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Updates a user
       tags:
       - user
-  /local-eats/users/{id}/activity:
+  /users/{id}/activity:
     get:
       description: Informs about user's activity by date
       parameters:
       - description: User ID
         in: path
-        name: user_id
+        name: id
+        required: true
+        type: string
+      - description: start date
+        in: query
+        name: start_date
+        required: true
+        type: string
+      - description: end date
+        in: query
+        name: end_date
         required: true
         type: string
       responses:
@@ -1349,9 +1430,13 @@ paths:
           description: Server error while processing request
           schema:
             type: string
+      security:
+      - ApiKeyAuth: []
       summary: Tracks user's activity
       tags:
       - user
+schemes:
+- http
 securityDefinitions:
   ApiKeyAuth:
     in: header

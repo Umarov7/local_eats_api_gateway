@@ -15,11 +15,12 @@ import (
 // @Summary Creates a payment
 // @Description Inserts a new payment into database
 // @Tags payment
+// @Security ApiKeyAuth
 // @Param payment body payment.NewPayment true "Payment info"
 // @Success 200 {object} payment.NewPayment
 // @Failure 400 {object} string "Invalid payment data"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/payments [post]
+// @Router /payments [post]
 func (h *Handler) CreatePayment(c *gin.Context) {
 	h.Logger.Info("CreatePayment method is starting")
 
@@ -84,11 +85,12 @@ func (h *Handler) CreatePayment(c *gin.Context) {
 // @Summary Gets a payment
 // @Description Retrieves payment info from database
 // @Tags payment
-// @Param payment_id path string true "Payment ID"
+// @Security ApiKeyAuth
+// @Param id path string true "Payment ID"
 // @Success 200 {object} payment.PaymentDetails
 // @Failure 400 {object} string "Invalid payment ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/payments/{id} [get]
+// @Router /payments/{id} [get]
 func (h *Handler) GetPayment(c *gin.Context) {
 	h.Logger.Info("GetPayment method is starting")
 

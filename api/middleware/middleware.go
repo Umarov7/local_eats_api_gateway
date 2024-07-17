@@ -16,7 +16,7 @@ func Check(c *gin.Context) {
 
 	if accessToken == "" {
 		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
-			"error": "Authorization is required",
+			"error": "Authorization header is required",
 		})
 		return
 	}
@@ -32,8 +32,7 @@ func Check(c *gin.Context) {
 		return
 	}
 
-	err = token.Claims.Valid()
-	if err != nil {
+	if !token.Valid {
 		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{
 			"error": "Invalid token provided",
 		})

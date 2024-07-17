@@ -3,6 +3,7 @@ package handler
 import (
 	pb "api-gateway/genproto/extra"
 	"context"
+	"log"
 	"net/http"
 	"time"
 
@@ -15,13 +16,14 @@ import (
 // @Summary Gets kitchen's statistics
 // @Description Informs about kitchen statistics by date
 // @Tags kitchen
-// @Param kitchen_id path string true "Kitchen ID"
+// @Security ApiKeyAuth
+// @Param id path string true "Kitchen ID"
 // @Param start_date query string true "start date"
 // @Param end_date query string true "end date"
 // @Success 200 {object} extra.Statistics
 // @Failure 400 {object} string "Invalid kitchen ID or date format"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/kitchens/{id}/statistics [get]
+// @Router /kitchens/{id}/statistics [get]
 func (h *Handler) GetStatistics(c *gin.Context) {
 	h.Logger.Info("GetStatistics method is starting")
 	kitchenID := c.Param("id")
@@ -79,13 +81,14 @@ func (h *Handler) GetStatistics(c *gin.Context) {
 // @Summary Tracks user's activity
 // @Description Informs about user's activity by date
 // @Tags user
-// @Param user_id path string true "User ID"
+// @Security ApiKeyAuth
+// @Param id path string true "User ID"
 // @Param start_date query string true "start date"
 // @Param end_date query string true "end date"
 // @Success 200 {object} extra.Activity
 // @Failure 400 {object} string "Invalid user ID or date format"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/users/{id}/activity [get]
+// @Router /users/{id}/activity [get]
 func (h *Handler) TrackActivity(c *gin.Context) {
 	h.Logger.Info("TrackActivity method is starting")
 	userID := c.Param("id")
@@ -143,12 +146,13 @@ func (h *Handler) TrackActivity(c *gin.Context) {
 // @Summary Sets working hours
 // @Description Sets working hours for kitchen
 // @Tags kitchen
-// @Param kitchen_id path string true "Kitchen ID"
-// @Param schedule body map[string]*extra.DaySchedule true "Working hours"
+// @Security ApiKeyAuth
+// @Param id path string true "Kitchen ID"
+// @Param schedule body map[string]extra.DaySchedule true "Working hours"
 // @Success 200 {object} extra.WorkingHoursResp
 // @Failure 400 {object} string "Invalid kitchen ID or data"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/kitchens/{id}/working-hours [post]
+// @Router /kitchens/{id}/working-hours [post]
 func (h *Handler) SetWorkingHours(c *gin.Context) {
 	h.Logger.Info("SetWorkingHours method is starting")
 	kitchenID := c.Param("id")
@@ -194,14 +198,16 @@ func (h *Handler) SetWorkingHours(c *gin.Context) {
 // @Summary Gets dish's nutrition info
 // @Description Informs about dish's nutritional value
 // @Tags dish
-// @Param dish_id path string true "Dish ID"
+// @Security ApiKeyAuth
+// @Param id path string true "Dish ID"
 // @Success 200 {object} extra.NutritionalInfo
 // @Failure 400 {object} string "Invalid dish ID"
 // @Failure 500 {object} string "Server error while processing request"
-// @Router /local-eats/dishes/{id}/nutrition-info [get]
+// @Router /dishes/{id}/nutrition [get]
 func (h *Handler) GetNutrition(c *gin.Context) {
 	h.Logger.Info("GetNutrition method is starting")
 	dishID := c.Param("id")
+	log.Print(dishID)
 
 	_, err := uuid.Parse(dishID)
 	if err != nil {
