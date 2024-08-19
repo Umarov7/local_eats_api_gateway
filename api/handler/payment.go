@@ -33,37 +33,34 @@ func (h *Handler) CreatePayment(c *gin.Context) {
 		return
 	}
 
-	if len(data.CardNumber) != 16 {
-		er := errors.New("invalid card number").Error()
-		c.AbortWithStatusJSON(http.StatusBadRequest,
-			gin.H{"error": er})
-		h.Logger.Error(er)
-		return
+	if data.CardNumber != "" {
+		if len(data.CardNumber) != 16 {
+			er := errors.New("invalid card number").Error()
+			c.AbortWithStatusJSON(http.StatusBadRequest,
+				gin.H{"error": er})
+			h.Logger.Error(er)
+			return
+		}
 	}
 
-	expiryTime, err := time.Parse("2006-01-02", data.ExpiryDate)
-	if err != nil {
-		er := errors.Wrap(err, "invalid expiry date").Error()
-		c.AbortWithStatusJSON(http.StatusBadRequest,
-			gin.H{"error": er})
-		h.Logger.Error(er)
-		return
+	if data.ExpiryDate != "" {
+		if len(data.ExpiryDate) != 5 {
+			er := errors.New("invalid expiry date").Error()
+			c.AbortWithStatusJSON(http.StatusBadRequest,
+				gin.H{"error": er})
+			h.Logger.Error(er)
+			return
+		}
 	}
 
-	if expiryTime.Before(time.Now()) {
-		er := errors.New("card is expired").Error()
-		c.AbortWithStatusJSON(http.StatusBadRequest,
-			gin.H{"error": er})
-		h.Logger.Error(er)
-		return
-	}
-
-	if len(data.Cvv) != 3 {
-		er := errors.New("invalid CVV").Error()
-		c.AbortWithStatusJSON(http.StatusBadRequest,
-			gin.H{"error": er})
-		h.Logger.Error(er)
-		return
+	if data.Cvv != "" {
+		if len(data.Cvv) != 3 {
+			er := errors.New("invalid CVV").Error()
+			c.AbortWithStatusJSON(http.StatusBadRequest,
+				gin.H{"error": er})
+			h.Logger.Error(er)
+			return
+		}
 	}
 
 	ctx, cancel := context.WithTimeout(c, time.Second*5)
