@@ -15,7 +15,7 @@ type Config struct {
 }
 
 func Load() *Config {
-	err := godotenv.Load("/home/ibrohim/go/src/github.com/golangN11/local_eats/API-Gateway/.env")
+	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatalf("error loading .env: %v", err)
 	}
