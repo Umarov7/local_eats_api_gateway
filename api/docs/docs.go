@@ -527,7 +527,7 @@ const docTemplate = `{
                 ],
                 "description": "Retrieves dishes info from database",
                 "tags": [
-                    "kitchen"
+                    "dish"
                 ],
                 "summary": "Gets dishes",
                 "parameters": [

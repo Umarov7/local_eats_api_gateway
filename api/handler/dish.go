@@ -185,7 +185,7 @@ func (h *Handler) DeleteDish(c *gin.Context) {
 // FetchDishes godoc
 // @Summary Gets dishes
 // @Description Retrieves dishes info from database
-// @Tags kitchen
+// @Tags dish
 // @Security ApiKeyAuth
 // @Param id path string true "Kitchen ID"
 // @Param page query int true "Page number"

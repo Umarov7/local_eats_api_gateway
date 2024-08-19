@@ -964,7 +964,7 @@ paths:
       - ApiKeyAuth: []
       summary: Gets dishes
       tags:
-      - kitchen
+      - dish
   /kitchens/{id}/orders:
     get:
       description: Gets orders from database

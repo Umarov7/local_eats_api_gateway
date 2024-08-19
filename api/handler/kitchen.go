@@ -113,7 +113,7 @@ func (h *Handler) UpdateKitchen(c *gin.Context) {
 		return
 	}
 
-	var data pb.NewData
+	var data pb.NewDataNoID
 	if err := c.ShouldBindJSON(&data); err != nil {
 		er := errors.Wrap(err, "invalid kitchen data").Error()
 		c.AbortWithStatusJSON(http.StatusBadRequest,
@@ -125,7 +125,12 @@ func (h *Handler) UpdateKitchen(c *gin.Context) {
 	ctx, cancel := context.WithTimeout(c, time.Second*5)
 	defer cancel()
 
-	res, err := h.KitchenClient.Update(ctx, &data)
+	res, err := h.KitchenClient.Update(ctx, &pb.NewData{
+		Id:          id,
+		Name:        data.Name,
+		Description: data.Description,
+		PhoneNumber: data.PhoneNumber,
+	})
 	if err != nil {
 		er := errors.Wrap(err, "error updating kitchen").Error()
 		c.AbortWithStatusJSON(http.StatusInternalServerError,
@@ -251,6 +256,7 @@ func (h *Handler) SearchKitchens(c *gin.Context) {
 	rating := c.Query("rating")
 	page := c.Query("page")
 	limit := c.Query("limit")
+	var ratingFloat float64
 
 	if query == "" && cuisineType == "" && rating == "" {
 		er := errors.New("invalid search parameters").Error()
@@ -260,13 +266,16 @@ func (h *Handler) SearchKitchens(c *gin.Context) {
 		return
 	}
 
-	ratingFloat, err := strconv.ParseFloat(rating, 32)
-	if err != nil {
-		er := errors.Wrap(err, "invalid search parameters").Error()
-		c.AbortWithStatusJSON(http.StatusBadRequest,
-			gin.H{"error": er})
-		h.Logger.Error(er)
-		return
+	if rating != "" {
+		r, err := strconv.ParseFloat(rating, 32)
+		if err != nil {
+			er := errors.Wrap(err, "invalid search parameters").Error()
+			c.AbortWithStatusJSON(http.StatusBadRequest,
+				gin.H{"error": er})
+			h.Logger.Error(er)
+			return
+		}
+		ratingFloat = r
 	}
 
 	p, err := strconv.Atoi(page)
